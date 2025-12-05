@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import logo from "../assets/PPGSlogo.png"; 
+
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -21,6 +23,12 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-4">
         {/* website nam */}
+         <img
+    src={logo}
+    alt="PPGS Logo"
+    className="w-16 h-16 sm:w-20 sm:h-20 object-contain -ml-4 sm:-ml-2 -mt-3"
+
+  />
         <h1
           className={`font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight transition-colors duration-300 md:block hidden ${
             scrolled ? "text-indigo-700" : "text-white"
@@ -77,7 +85,7 @@ export default function Navbar() {
       <div
         className={`md:hidden transition-all duration-300 overflow-hidden ${
           open ? "max-h-80" : "max-h-0"
-        } ${scrolled ? "bg-indigo-900/95" : "bg-white/95"} backdrop-blur-sm`}
+        } ${scrolled ? "bg-indigo-900/95" : ""} backdrop-blur-sm`}
       >
         <div className="px-6 py-5 flex flex-col gap-4">
           {["About", "Programs", "Reach Out"].map((item) => (

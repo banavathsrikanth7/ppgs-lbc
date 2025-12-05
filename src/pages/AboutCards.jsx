@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import about1 from "../assets/about1.mp4";
+
+
 
 function VerticalSliceVideo({ video, slices = 4, gap = 4 }) {
   return (
@@ -12,7 +15,7 @@ function VerticalSliceVideo({ video, slices = 4, gap = 4 }) {
           className="flex-1 h-full overflow-hidden rounded-2xl shadow-lg"
           initial={{
             opacity: 0,
-            y: idx % 2 === 0 ? -50 : 50, 
+            y: idx % 2 === 0 ? -50 : 50,
           }}
           animate={{
             opacity: 1,
@@ -24,12 +27,12 @@ function VerticalSliceVideo({ video, slices = 4, gap = 4 }) {
             ease: "easeOut",
           }}
           whileHover={{
-            y: idx % 2 === 0 ? -10 : 10, 
+            y: idx % 2 === 0 ? -10 : 10,
             transition: { type: "spring", stiffness: 120 },
           }}
         >
           <video
-            src={video}
+            src={about1}
             autoPlay
             loop
             muted
@@ -45,7 +48,7 @@ function VerticalSliceVideo({ video, slices = 4, gap = 4 }) {
   );
 }
 
-function MultiVideoCard({ title, text, video, slices = 4, reversed = false }) {
+function MultiVideoCard({ title, text, video, slices = 4, reversed = false, link = "#" }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -56,7 +59,7 @@ function MultiVideoCard({ title, text, video, slices = 4, reversed = false }) {
         reversed ? "md:flex-row-reverse" : ""
       }`}
     >
-      {/* Video  lbc*/}
+      {/* Video  */}
       <motion.div
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 120 }}
@@ -65,7 +68,7 @@ function MultiVideoCard({ title, text, video, slices = 4, reversed = false }) {
         <VerticalSliceVideo video={video} slices={slices} gap={6} />
       </motion.div>
 
-      {/* matter  */}
+      {/* Content */}
       <motion.div
         initial={{ opacity: 0, x: reversed ? 60 : -60 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -75,9 +78,18 @@ function MultiVideoCard({ title, text, video, slices = 4, reversed = false }) {
         <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-md">
           {title}
         </h2>
+
         <p className="text-gray-100 text-lg leading-relaxed max-w-xl">
           {text}
         </p>
+
+       
+        <a
+          href={link}
+          className="mt-4 px-6 py-2 rounded-full bg-white/20 backdrop-blur-md text-white font-semibold border border-white/30 hover:bg-white/30 transition-all duration-300"
+        >
+          View More →
+        </a>
       </motion.div>
     </motion.div>
   );
@@ -92,7 +104,7 @@ export default function AboutCards() {
         background: "linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d)",
       }}
     >
-      {/* headings  */}
+      {/* Heading */}
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -110,6 +122,7 @@ export default function AboutCards() {
           video="/about1.mp4"
           slices={4}
           reversed={false}
+          link="https://www.linkedin.com/company/civil-services-club-iitkgp/"
         />
 
         <MultiVideoCard
@@ -118,6 +131,7 @@ export default function AboutCards() {
           video="/about1.mp4"
           slices={4}
           reversed={true}
+          link="https://www.linkedin.com/posts/civil-services-club-iitkgp_from-conception-to-implementation-this-was-activity-7347588327803359232-g0IE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFJ5lngBA7dTq5VdjvACncAGKhJ8ke-2FKE"
         />
 
         <MultiVideoCard
@@ -126,6 +140,7 @@ export default function AboutCards() {
           video="/about1.mp4"
           slices={4}
           reversed={false}
+          link="https://www.linkedin.com/posts/civil-services-club-iitkgp_the-youth-of-today-are-the-leaders-of-tomorrow-activity-7333395941300826112-LLaG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFJ5lngBA7dTq5VdjvACncAGKhJ8ke-2FKE"
         />
       </div>
     </section>
