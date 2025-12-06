@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import AboutCards from "./AboutCards";
 import Footer from "../components/Footer";
-import LBCimage  from "../assets/LBCimage.jpg" ;
+import LBCimage from "../assets/LBCimage.jpg";
 
 
 function StatsCircles() {
@@ -13,41 +13,58 @@ function StatsCircles() {
   ];
 
   const [counts, setCounts] = useState(stats.map(() => 0));
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const sectionRef = useRef(null);
 
-useEffect(() => {
-  const timers = stats.map((stat, i) => {
-    return setInterval(() => {
-      setCounts((prev) => {
-        const updated = [...prev];
-
-        // stop when target is reached
-        if (updated[i] < stat.value) {
-          updated[i] = updated[i] + 1;
-        } else {
-          clearInterval(timers[i]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          startCounting();
+          setHasAnimated(true);
         }
+      },
+      { threshold: 0.4 } 
+    );
 
-        return updated;
-      });
-    }, 150); 
-  });
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
-  return () => timers.forEach((t) => clearInterval(t));
-}, []);
+    return () => observer.disconnect();
+  }, [hasAnimated]);
 
+  const startCounting = () => {
+    const timers = [];
+
+    stats.forEach((stat, i) => {
+      const timer = setInterval(() => {
+        setCounts((prev) => {
+          if (prev[i] >= stat.value) {
+            clearInterval(timer);
+            return prev;
+          }
+
+          const updated = [...prev];
+          updated[i] = updated[i] + 1;
+          return updated;
+        });
+      }, 120);
+
+      timers.push(timer);
+    });
+  };
 
   return (
-    <section className="w-full bg-gradient-to-b from-[#120042] via-[#1b0057] to-[#0a0029] py-16">
+    <section
+      ref={sectionRef}
+      className="w-full bg-gradient-to-b from-[#120042] via-[#1b0057] to-[#0a0029] py-16"
+    >
       <div className="flex flex-wrap justify-center gap-18 px-6">
         {stats.map((item, index) => (
           <div
             key={index}
             className="flex flex-col items-center text-white transition-transform duration-300 hover:scale-110"
           >
-            {/* Circle wrapper */}
             <div className="relative w-25 h-25 sm:w-40 sm:h-40 flex items-center justify-center group">
-
-              {/* Outer Glow Ring */}
               <div
                 className="
                   absolute inset-0 rounded-full p-[4px]
@@ -57,7 +74,6 @@ useEffect(() => {
                 "
               ></div>
 
-              {/* Inner Circle */}
               <div
                 className="
                   relative w-full h-full rounded-full
@@ -72,7 +88,6 @@ useEffect(() => {
               </div>
             </div>
 
-            {/* Label */}
             <p className="text-xl sm:text-2xl mt-4 font-semibold tracking-wide">
               {item.label}
             </p>
@@ -110,7 +125,6 @@ export default function Lbc() {
         <AboutCards />
       </main>
 
-      
       <StatsCircles />
 
       <Footer />
