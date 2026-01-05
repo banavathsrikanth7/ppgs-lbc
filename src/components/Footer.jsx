@@ -17,7 +17,7 @@ export default function Footer() {
           <h4 className="font-bold text-lg mb-3">Quick Links</h4>
           <ul className="space-y-2">
             <li><a href="#about" className="hover:text-indigo-300 transition">About</a></li>
-            <li><a href="#about" className="hover:text-indigo-300 transition">Programs</a></li>
+            <li><a href="#programs" className="hover:text-indigo-300 transition">Programs</a></li>
             <li><a href="#reachout" className="hover:text-indigo-300 transition">Reach Out</a></li>
           </ul>
         </div>

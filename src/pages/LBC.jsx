@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import AboutCards from "./AboutCards";
+import Programs from "./Programs"
 import Footer from "../components/Footer";
 import LBCimage from "../assets/LBCimage.jpg";
 
@@ -123,6 +124,8 @@ export default function Lbc() {
       {/* main */}
       <main>
         <AboutCards />
+     <Programs />
+
       </main>
 
       <StatsCircles />
