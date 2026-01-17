@@ -1,4 +1,4 @@
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -41,7 +41,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/20 text-center py-4 text-sm">
-        © {new Date().getFullYear()} LBC • All rights reserved
+        © {new Date().getFullYear()} LBC • Made by Banavath Srikanth
       </div>
     </footer>
   );

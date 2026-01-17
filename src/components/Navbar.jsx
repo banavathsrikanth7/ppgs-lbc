@@ -43,7 +43,7 @@ export default function Navbar() {
             <a
               key={item}
               href={`#${item.toLowerCase().replace(" ", "")}`}
-              className={`${gradientButton} border-2 border-transparent`}
+              className={`${gradientButton}  border-transparent`}
             >
               {item}
             </a>
